@@ -1,11 +1,17 @@
 package com.pitang.treinamento.dto;
 
+import java.util.List;
+
+import com.pitang.treinamento.model.Contatos;
+
 public class UserDto {
 	private Long id;
 	private String name;
 	private String username;
 	private String email;
 	private String password;
+	
+	
 	
 	public String getName() {
 		return name;

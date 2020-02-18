@@ -24,11 +24,12 @@ public class ModelMapperComponent {
                 new PropertyMap<UserModel, UserDto>() {
                     @Override
                     protected void configure() {
-                    	map().setId(source.getId());
+                    	
                     	map().setEmail(source.getEmail());
                     	map().setUsername(source.getUsername());
                     	map().setName(source.getName());
                     	map().setPassword(null);
+                    	
                     	/*
                     	when(Conditions.isNotNull()).using(ModelConverter.convertStatus).map(source.isStatus()).setStatus(null);
                     	map().getUserProfileDto().setId(source.getUserProfile().getId());
@@ -50,11 +51,12 @@ public class ModelMapperComponent {
                 new PropertyMap<UserDto, UserModel>() {
                     @Override
                     protected void configure() {
-                    	map().setId(source.getId());
+                    	
                     	map().setPassword(source.getPassword());
                     	map().setEmail(source.getEmail());
                     	map().setUsername(source.getUsername());
                     	map().setName(source.getName());
+                    	skip().setContacts(null);
                     	
                     	/*when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map(source.getStatus()).setStatus(false);
                     	skip().setUserProfile(null);

@@ -8,6 +8,8 @@ import com.pitang.treinamento.model.UserModel;
 public interface UserService {
 	
 	public List<UserModel> listUsers();
+	
+	public UserModel findUserByEmail(String email);
 
-	public UserModel findUserByUsername(String username);
+	public UserModel addUser(UserModel userModel);
 }
