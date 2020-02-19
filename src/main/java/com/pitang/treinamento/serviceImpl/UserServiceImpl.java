@@ -48,13 +48,17 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public UserModel updateUser(UserModel user) {
-		if(user.getId() == null) {
+	public UserModel updateUser(Long id ,UserModel user) {
+		if(id == null) {
 			throw new ExceptionBadRequest("Necessário informar o id para atualizar!");
 		}
-		checkIntegrity(user);
+		///checkIntegrity(user);
+		UserModel userDb = userRepository.findById(id).get();
+		userDb.setName(user.getName());
+		
+		
 		//validateUser(user);
-		return userRepository.save(user);
+		return userRepository.save(userDb);
 	}
 	
 	@Override

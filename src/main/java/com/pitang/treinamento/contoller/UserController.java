@@ -1,4 +1,4 @@
-package com.pitang.treinamento.controller;
+package com.pitang.treinamento.contoller;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class UserController {
 		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		userService.updateUser(userModel);
+		userModel = userService.updateUser(id ,userModel);
 		
 		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
@@ -79,4 +79,3 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
-

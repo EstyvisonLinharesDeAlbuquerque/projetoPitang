@@ -10,16 +10,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EntityScan(basePackageClasses = {
-		SmsApplication.class,
+		smsApplication.class,
 })
-public class SmsApplication {
+public class smsApplication {
 	@Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SmsApplication.class, args);
+		SpringApplication.run(smsApplication.class, args);
 	}
 
 }
@@ -28,7 +28,7 @@ class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SmsApplication.class);
+        return application.sources(smsApplication.class);
     }
 
 }
