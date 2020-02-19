@@ -30,7 +30,7 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		//List<UserDto> usersDto = ModelMapperComponent.modelMapper.map(users, new TypeToken<List<UserDto>>() {}.getType());
+		List<UserDto> usersDto = ModelMapperComponent.modelMapper.map(users, new TypeToken<List<UserDto>>() {}.getType());
 		
 		ModelMapperComponent.modelMapper.validate();
 		
@@ -53,6 +53,30 @@ public class UserController {
 		ModelMapperComponent.modelMapper.validate();
 		
 		return new ResponseEntity<>(userDto,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<UserDto> updateUsers(@PathVariable("id") Long id, @RequestBody UserDto userDto){
+		
+		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		userService.updateUser(userModel);
+		
+		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		return new ResponseEntity<>(userDto,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<UserDto> removeUser(@PathVariable("id") Long id){
+		
+		userService.deleteUser(id);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.pitang.treinamento.exceptions.ExceptionBadRequest;
-//import com.pitang.treinamento.exceptions.ExceptionBadRequest;
+import java.util.Optional;
 import com.pitang.treinamento.exceptions.ExceptionConflict;
 import com.pitang.treinamento.model.UserModel;
 import com.pitang.treinamento.repository.UserRepository;
@@ -45,7 +45,25 @@ public class UserServiceImpl implements UserService {
 		checkIntegrity(userModel);
 		return userRepository.save(userModel);
 	}
-
+	
+	
+	@Override
+	public UserModel updateUser(UserModel user) {
+		if(user.getId() == null) {
+			throw new ExceptionBadRequest("Necessário informar o id para atualizar!");
+		}
+		checkIntegrity(user);
+		//validateUser(user);
+		return userRepository.save(user);
+	}
+	
+	@Override
+	public void deleteUser(Long id) {
+		Optional<UserModel> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			userRepository.deleteById(id);
+		}
+	}
 
 	private void validateUser(UserModel user) {
 		if (!StringUtils.isEmpty(user.getEmail()) && userRepository.findByEmail(user.getEmail()) != null) {
@@ -55,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
 	private void checkIntegrity(UserModel user) {
 		checkMandatoryFields(user);
-	}
+		}
 
 	private void checkMandatoryFields(UserModel user) {
 		if (user == null) {
