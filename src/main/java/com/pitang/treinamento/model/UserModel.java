@@ -36,8 +36,8 @@ public class UserModel {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userModel")
-	private List<Contatos> contacts;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel")
+	private List<Contact> contacts;
 
 	/*
 	public UserModel(String name, String username, String email, String password) {
@@ -87,11 +87,11 @@ public class UserModel {
 		this.password = password;
 	}
 
-	public List<Contatos> getContacts() {
+	public List<Contact> getContacts() {
 		return contacts;
 	}
 
-	public void setContacts(List<Contatos> contacts) {
+	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
 

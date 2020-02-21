@@ -1,14 +1,25 @@
 package com.pitang.treinamento.dto;
 
+import java.util.List;
+
+import com.pitang.treinamento.model.Contact;
+
 public class UserDto {
 	private Long id;
 	private String name;
 	private String username;
 	private String email;
 	private String password;
+	private List<Contact> contacts;
 	
 	
 	
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
 	public String getName() {
 		return name;
 	}

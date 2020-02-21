@@ -35,17 +35,15 @@ public class UserServiceImpl implements UserService {
 		if (userRepository.findAll().size() == 0) {
 			return null;
 		}
-		// TODO Auto-generated method stub
 		return userRepository.findByEmail(email);
 	}
 
 	@Override
 	public UserModel addUser(UserModel userModel) {
 		validateUser(userModel);
-		checkIntegrity(userModel);
+		checkIntegrityUser(userModel);
 		return userRepository.save(userModel);
 	}
-	
 	
 	@Override
 	public UserModel updateUser(Long id ,UserModel user) {
@@ -73,13 +71,18 @@ public class UserServiceImpl implements UserService {
 		if (!StringUtils.isEmpty(user.getEmail()) && userRepository.findByEmail(user.getEmail()) != null) {
 			throw new ExceptionConflict("Email informado já existe!");
 		}
+		if(!StringUtils.isEmpty(user.getUsername()) && userRepository.findByUsername(user.getUsername()) != null) {
+			throw new ExceptionConflict("Nome de usuário informado já existe!");
+		}
 	}
-
-	private void checkIntegrity(UserModel user) {
+	
+	/*
+	protected void checkIntegrityUser(UserModel user) {
 		checkMandatoryFields(user);
 		}
-
-	private void checkMandatoryFields(UserModel user) {
+	*/
+	
+	protected void checkIntegrityUser(UserModel user) {
 		if (user == null) {
 			throw new ExceptionBadRequest("Usuário não pode ser nulo!");
 		}

@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "contatos")
-public class Contatos {
+public class Contact {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +32,8 @@ public class Contatos {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	
-	private UserModel userModel ;
+	@JoinColumn(name = "fk_userModel")
+	private UserModel userModel;
 
 	public Long getId() {
 		return id;
@@ -65,6 +66,4 @@ public class Contatos {
 	public void setUserModel(UserModel userModel) {
 		this.userModel = userModel;
 	}
-	
-	
 }
