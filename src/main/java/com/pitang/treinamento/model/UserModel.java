@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 
 
 
+
 @Entity
 @Table(name = "user")
 

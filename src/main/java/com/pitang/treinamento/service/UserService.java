@@ -18,4 +18,5 @@ public interface UserService {
 	public void deleteUser(Long id);
 
 	public boolean verifyUser(Long id);
+	
 }

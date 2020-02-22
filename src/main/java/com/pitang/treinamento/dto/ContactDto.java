@@ -1,10 +1,20 @@
 package com.pitang.treinamento.dto;
 
+import com.pitang.treinamento.model.UserModel;
+
 public class ContactDto {
 	private Long id;
 	private String name;
 	private String fone;
+	private UserModel userModel;
 	
+	
+	public UserModel getUserModel() {
+		return userModel;
+	}
+	public void setUserModel(UserModel user) {
+		this.userModel = user;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -44,29 +44,29 @@ public class UserServiceImpl implements UserService {
 		checkIntegrityUser(userModel);
 		return userRepository.save(userModel);
 	}
-	
+
+
 	@Override
-	public UserModel updateUser(Long id ,UserModel user) {
-		if(id == null) {
+	public UserModel updateUser(Long id, UserModel user) {
+		if (id == null) {
 			throw new ExceptionBadRequest("Necessário informar o id para atualizar!");
 		}
-		///checkIntegrity(user);
+		/// checkIntegrity(user);
 		UserModel userDb = userRepository.findById(id).get();
 		userDb.setName(user.getName());
-		
-		
-		//validateUser(user);
+
+		// validateUser(user);
 		return userRepository.save(userDb);
 	}
-	
+
 	@Override
 	public void deleteUser(Long id) {
-		
-		if(verifyUser(id)) {
+
+		if (verifyUser(id)) {
 			userRepository.deleteById(id);
 		}
 	}
-	
+
 	@Override
 	public boolean verifyUser(Long id) {
 		Optional<UserModel> user = userRepository.findById(id);
@@ -77,17 +77,16 @@ public class UserServiceImpl implements UserService {
 		if (!StringUtils.isEmpty(user.getEmail()) && userRepository.findByEmail(user.getEmail()) != null) {
 			throw new ExceptionConflict("Email informado já existe!");
 		}
-		if(!StringUtils.isEmpty(user.getUsername()) && userRepository.findByUsername(user.getUsername()) != null) {
+		if (!StringUtils.isEmpty(user.getUsername()) && userRepository.findByUsername(user.getUsername()) != null) {
 			throw new ExceptionConflict("Nome de usuário informado já existe!");
 		}
 	}
-	
+
 	/*
-	protected void checkIntegrityUser(UserModel user) {
-		checkMandatoryFields(user);
-		}
-	*/
-	
+	 * protected void checkIntegrityUser(UserModel user) {
+	 * checkMandatoryFields(user); }
+	 */
+
 	private void checkIntegrityUser(UserModel user) {
 		if (user == null) {
 			throw new ExceptionBadRequest("Usuário não pode ser nulo!");

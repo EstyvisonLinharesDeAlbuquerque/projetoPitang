@@ -70,7 +70,7 @@ public class ModelMapperComponent {
 			protected void configure() {
 				map().setName(source.getName());
 				map().setFone(source.getFone());
-				skip().setUserModel(null);
+				map().setUserModel(source.getUserModel());
 			}
 		});
 
@@ -79,6 +79,7 @@ public class ModelMapperComponent {
 			protected void configure() {
 				map().setName(source.getName());
 				map().setFone(source.getFone());
+				map().setUserModel(source.getUserModel());
 			}
 		});
 	}
