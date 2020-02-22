@@ -61,10 +61,16 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void deleteUser(Long id) {
-		Optional<UserModel> user = userRepository.findById(id);
-		if(user.isPresent()) {
+		
+		if(verifyUser(id)) {
 			userRepository.deleteById(id);
 		}
+	}
+	
+	@Override
+	public boolean verifyUser(Long id) {
+		Optional<UserModel> user = userRepository.findById(id);
+		return user.isPresent();
 	}
 
 	private void validateUser(UserModel user) {
@@ -82,7 +88,7 @@ public class UserServiceImpl implements UserService {
 		}
 	*/
 	
-	protected void checkIntegrityUser(UserModel user) {
+	private void checkIntegrityUser(UserModel user) {
 		if (user == null) {
 			throw new ExceptionBadRequest("Usuário não pode ser nulo!");
 		}
