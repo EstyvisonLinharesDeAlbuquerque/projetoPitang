@@ -1,11 +1,14 @@
 package com.pitang.treinamento.contoller;
 
+import java.util.List;
+
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.pitang.treinamento.dto.ContactDto;
+import com.pitang.treinamento.dto.UserDto;
 import com.pitang.treinamento.exceptions.ExceptionConflict;
 import com.pitang.treinamento.mapper.ModelMapperComponent;
 import com.pitang.treinamento.model.*;
@@ -26,6 +29,16 @@ public class ContactController {
 		this.contactService = contactService;
 	}
 
+	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Contact>> listContacts(@PathVariable("id") Long id){
+		
+		List<Contact> contacts = contactService.listContacts(id);
+		
+		return new ResponseEntity<>(contacts,HttpStatus.OK);
+		
+	}
+	
 	@RequestMapping(value = "/contact/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> addContacts(@PathVariable("id") Long id, @RequestBody ContactDto contactDto) {

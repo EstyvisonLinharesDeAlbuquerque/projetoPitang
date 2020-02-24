@@ -34,10 +34,22 @@ public class UserController {
 		}
 		
 		List<UserDto> usersDto = ModelMapperComponent.modelMapper.map(users, new TypeToken<List<UserDto>>() {}.getType());
-		
 		ModelMapperComponent.modelMapper.validate();
 		
 		return new ResponseEntity<>(users,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> buscarUser(@PathVariable("id") Long id){
+		List<UserModel> users = userService.listUsers();
+		if(users.size() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		UserModel userModel = userService.buscarUser(id);
+		
+		return new ResponseEntity<>(userModel,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -62,6 +74,11 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<UserDto> updateUsers(@PathVariable("id") Long id, @RequestBody UserDto userDto){
 		
+		List<UserModel> users = userService.listUsers();
+		if(users.size() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
 		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
@@ -76,6 +93,11 @@ public class UserController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<UserDto> removeUser(@PathVariable("id") Long id){
+		
+		List<UserModel> users = userService.listUsers();
+		if(users.size() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		
 		userService.deleteUser(id);
 		

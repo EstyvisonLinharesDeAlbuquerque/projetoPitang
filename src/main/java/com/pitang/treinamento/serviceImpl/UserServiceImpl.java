@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import com.pitang.treinamento.exceptions.ExceptionBadRequest;
 import java.util.Optional;
 import com.pitang.treinamento.exceptions.ExceptionConflict;
@@ -61,16 +60,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(Long id) {
-
-		if (verifyUser(id)) {
+		Optional<UserModel> user = userRepository.findById(id);
+		if (user.isPresent()) {
 			userRepository.deleteById(id);
 		}
 	}
 
 	@Override
-	public boolean verifyUser(Long id) {
-		Optional<UserModel> user = userRepository.findById(id);
-		return user.isPresent();
+	public UserModel buscarUser(Long id) {
+		UserModel user = userRepository.findById(id).get();
+		return user;
+		
 	}
 
 	private void validateUser(UserModel user) {

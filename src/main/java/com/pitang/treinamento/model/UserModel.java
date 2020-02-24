@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 
@@ -32,12 +35,12 @@ public class UserModel {
 	@Column(name = "email")
 	public String email;
 
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@NotNull
-	@Size(max = 65)
-	@Column(name = "password")
 	private String password;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel")
+	@JsonIgnore
 	private List<Contact> contacts;
 
 	/*
