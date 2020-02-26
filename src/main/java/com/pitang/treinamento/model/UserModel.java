@@ -8,12 +8,8 @@ import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
-
 @Entity
 @Table(name = "user")
-
 public class UserModel {
 
 	@Id
@@ -42,7 +38,10 @@ public class UserModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel")
 	@JsonIgnore
 	private List<Contact> contacts;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userMessage")
+	private List<String> message;
+	
 	/*
 	public UserModel(String name, String username, String email, String password) {
 		setName(name);
@@ -53,6 +52,14 @@ public class UserModel {
 	*/
 	public Long getId() {
 		return id;
+	}
+
+	public List<String> getMessage() {
+		return message;
+	}
+
+	public void setMessage(List<String> message) {
+		this.message = message;
 	}
 
 	public void setId(Long id) {

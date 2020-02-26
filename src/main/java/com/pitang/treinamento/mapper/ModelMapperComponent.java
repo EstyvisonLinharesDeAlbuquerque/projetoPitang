@@ -2,6 +2,7 @@ package com.pitang.treinamento.mapper;
 
 import javax.annotation.PostConstruct;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
@@ -80,6 +81,27 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setFone(source.getFone());
 				map().setUserModel(source.getUserModel());
+			}
+		});
+
+		modelMapper.addMappings(new PropertyMap<Message, MessageDto>() {
+			@Override
+			protected void configure() {
+				map().setMessage(source.getMessage());
+				using(ModelConverter.fromDateToString).map(source.getDatetime()).setDatetime(null);
+				map().setDestiny(source.getDestiny());
+				map().setSource(source.getSource());
+			}
+		});
+		
+		modelMapper.addMappings(new PropertyMap<MessageDto, Message>(){
+			@Override
+			protected void configure() {
+				map().setMessage(source.getMessage());
+				map().setDestiny(source.getDestiny());
+				map().setSource(source.getSource());
+				when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map(source.isStatusDestiny()).setStatusDestiny(false);
+				when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map(source.isStatusSource()).setStatusSource(false); 
 			}
 		});
 	}

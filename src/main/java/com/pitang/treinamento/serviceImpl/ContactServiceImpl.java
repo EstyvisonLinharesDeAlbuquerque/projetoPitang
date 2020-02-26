@@ -1,6 +1,7 @@
 package com.pitang.treinamento.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,11 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public void removeContact(Long id) {
-		
+	public void deleteContact(Long id, Long id2) {
+		Optional<UserModel> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			contactRepository.deleteById(id2);
+		}
 		
 	}
 

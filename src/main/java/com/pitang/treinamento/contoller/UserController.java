@@ -92,7 +92,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<UserDto> removeUser(@PathVariable("id") Long id){
+	public ResponseEntity<?> removeUser(@PathVariable("id") Long id){
 		
 		List<UserModel> users = userService.listUsers();
 		if(users.size() == 0) {
@@ -101,6 +101,6 @@ public class UserController {
 		
 		userService.deleteUser(id);
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("Usuário removido com sucesso!",HttpStatus.OK);
 	}
 }
