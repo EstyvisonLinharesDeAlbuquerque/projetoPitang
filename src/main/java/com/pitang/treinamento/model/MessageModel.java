@@ -16,7 +16,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "message")
-public class Message {
+public class MessageModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -42,11 +42,11 @@ public class Message {
 	private boolean statusDestiny;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_userMessage")
+	@JoinColumn(name = "user_source", referencedColumnName = "id")
 	private UserModel source;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_contactMessage")
+	@JoinColumn(name = "user_destiny", referencedColumnName = "id")
 	private Contact destiny;
 
 	public Long getId() {

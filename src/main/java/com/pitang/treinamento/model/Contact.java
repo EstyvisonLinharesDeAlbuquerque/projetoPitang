@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "contatos")
+@Table(name = "contact")
 public class Contact {
 
 	@Id
@@ -37,20 +37,20 @@ public class Contact {
 	private String fone;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_userModel")
+	@JoinColumn(name = "id_userModel", referencedColumnName = "id")
 	@JsonIgnore
 	private UserModel userModel;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactMessage")
-	private List<String> message;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "destiny")
+	@JsonIgnore
+	private List<MessageModel> contactMessage;
 	
-
-	public List<String> getMessage() {
-		return message;
+	public List<MessageModel> getContactMessage() {
+		return contactMessage;
 	}
 
-	public void setMessage(List<String> message) {
-		this.message = message;
+	public void setContactMessage(List<MessageModel> message) {
+		this.contactMessage = message;
 	}
 
 	public Long getId() {

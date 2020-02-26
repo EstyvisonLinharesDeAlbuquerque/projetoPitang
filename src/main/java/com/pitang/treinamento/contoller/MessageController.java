@@ -5,16 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.pitang.treinamento.dto.ContactDto;
 import com.pitang.treinamento.dto.MessageDto;
 import com.pitang.treinamento.exceptions.ExceptionConflict;
 import com.pitang.treinamento.mapper.ModelMapperComponent;
 import com.pitang.treinamento.model.*;
 import com.pitang.treinamento.repository.ContactRepository;
 import com.pitang.treinamento.repository.UserRepository;
+import com.pitang.treinamento.service.MessageService;
 
 @RestController
 public class MessageController {
-	
+	private MessageService messageService;
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -37,11 +40,17 @@ public class MessageController {
 		Contact contact = contactRepository.findById(id2).get();
 		messageDto.setDestiny(contact);
 		
-		Message message = ModelMapperComponent.modelMapper.map(messageDto, new TypeToken<Contact>() {
+		MessageModel message = ModelMapperComponent.modelMapper.map(messageDto, new TypeToken<Contact>() {
 		}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
+		messageService.sendMessage(message);
 		
+		messageDto = ModelMapperComponent.modelMapper.map(message, new TypeToken<ContactDto>() {
+		}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		return new ResponseEntity<>("Mensagem enviada com sucesso", HttpStatus.OK);
 		
 	}
 }

@@ -30,8 +30,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } 
         return new User("Tito","123",true,true,true,true,emptyList());
     }
-
-	
-	
-	
 }

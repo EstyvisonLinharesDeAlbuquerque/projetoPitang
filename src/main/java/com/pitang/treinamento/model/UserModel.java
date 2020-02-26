@@ -35,12 +35,13 @@ public class UserModel {
 	@NotNull
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Contact> contacts;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userMessage")
-	private List<String> message;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "source", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<MessageModel> message;
 	
 	/*
 	public UserModel(String name, String username, String email, String password) {
@@ -54,11 +55,11 @@ public class UserModel {
 		return id;
 	}
 
-	public List<String> getMessage() {
+	public List<MessageModel> getMessage() {
 		return message;
 	}
 
-	public void setMessage(List<String> message) {
+	public void setMessage(List<MessageModel> message) {
 		this.message = message;
 	}
 

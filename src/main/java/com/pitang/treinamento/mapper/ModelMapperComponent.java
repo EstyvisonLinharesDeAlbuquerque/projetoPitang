@@ -29,7 +29,7 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setPassword(null);
 				map().setContacts(source.getContacts());
-
+				map().setMessage(source.getMessage());
 				/*
 				 * when(Conditions.isNotNull()).using(ModelConverter.convertStatus).map(source.
 				 * isStatus()).setStatus(null);
@@ -59,6 +59,7 @@ public class ModelMapperComponent {
 				map().setUsername(source.getUsername());
 				map().setName(source.getName());
 				map().setContacts(source.getContacts());
+				map().setMessage(source.getMessage());
 				/*
 				 * when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map
 				 * (source.getStatus()).setStatus(false); skip().setUserProfile(null);
@@ -72,6 +73,7 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setFone(source.getFone());
 				map().setUserModel(source.getUserModel());
+				map().setContactMessage(source.getContactMessage());
 			}
 		});
 
@@ -81,10 +83,11 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setFone(source.getFone());
 				map().setUserModel(source.getUserModel());
+				map().setContactMessage(source.getContactMessage());
 			}
 		});
 
-		modelMapper.addMappings(new PropertyMap<Message, MessageDto>() {
+		modelMapper.addMappings(new PropertyMap<MessageModel, MessageDto>() {
 			@Override
 			protected void configure() {
 				map().setMessage(source.getMessage());
@@ -94,7 +97,7 @@ public class ModelMapperComponent {
 			}
 		});
 		
-		modelMapper.addMappings(new PropertyMap<MessageDto, Message>(){
+		modelMapper.addMappings(new PropertyMap<MessageDto, MessageModel>(){
 			@Override
 			protected void configure() {
 				map().setMessage(source.getMessage());

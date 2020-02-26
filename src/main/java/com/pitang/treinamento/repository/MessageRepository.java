@@ -3,8 +3,8 @@ package com.pitang.treinamento.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.pitang.treinamento.model.Message;
+import com.pitang.treinamento.model.MessageModel;
 
-public interface MessageRepository extends JpaRepository<Message, Long> {
-	Message findBySource(String source);
+public interface MessageRepository extends JpaRepository<MessageModel, Long> {
+	MessageModel findBySource(String source);
 }
