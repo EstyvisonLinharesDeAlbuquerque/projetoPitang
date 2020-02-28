@@ -1,13 +1,10 @@
 package com.pitang.treinamento.mapper;
 
 import javax.annotation.PostConstruct;
-
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
-
 import com.pitang.treinamento.dto.*;
 import com.pitang.treinamento.model.*;
 
@@ -38,8 +35,7 @@ public class ModelMapperComponent {
 				 * map().getUserProfileDto().setAddress2(source.getUserProfile().getAddress2());
 				 * map().getUserProfileDto().setCity(source.getUserProfile().getCity());
 				 * map().getUserProfileDto().setCountry(source.getUserProfile().getCountry());
-				 * using(ModelConverter.fromDateToString).map(source.getUserProfile().
-				 * getDateOfBirth()).getUserProfileDto().setDateOfBirth(null);
+				 * using(ModelConverter.fromDateToString).map(source.getUserProfile().getDateOfBirth()).getUserProfileDto().setDateOfBirth(null);
 				 * map().getUserProfileDto().setPhoneNumber(source.getUserProfile().
 				 * getPhoneNumber());
 				 * map().getUserProfileDto().setState(source.getUserProfile().getState());
@@ -91,7 +87,8 @@ public class ModelMapperComponent {
 			@Override
 			protected void configure() {
 				map().setMessage(source.getMessage());
-				using(ModelConverter.fromDateToString).map(source.getDatetime()).setDatetime(null);
+				map().setDate(source.getDate());
+				map().setHour(source.getHour());
 				map().setDestiny(source.getDestiny());
 				map().setSource(source.getSource());
 			}
@@ -101,10 +98,10 @@ public class ModelMapperComponent {
 			@Override
 			protected void configure() {
 				map().setMessage(source.getMessage());
+				map().setDate(source.getDate());
+				map().setHour(source.getHour());
 				map().setDestiny(source.getDestiny());
 				map().setSource(source.getSource());
-				when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map(source.isStatusDestiny()).setStatusDestiny(false);
-				when(Conditions.isNotNull()).using(ModelConverter.convertStatusToBoolean).map(source.isStatusSource()).setStatusSource(false); 
 			}
 		});
 	}

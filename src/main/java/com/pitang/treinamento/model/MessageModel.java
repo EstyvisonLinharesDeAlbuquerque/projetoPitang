@@ -1,6 +1,7 @@
 package com.pitang.treinamento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import com.sun.istack.NotNull;
 
@@ -22,24 +24,32 @@ public class MessageModel {
 	private Long id;
 	
 	@NotNull
+	@Past
 	@Size(max = 65)
-	@Column(name = "datetime")
-	private Date datetime;
+	@Column(name = "date")
+	private LocalDate date;
+	
+	@NotNull
+	@Past
+	@Size(max = 65)
+	@Column(name = "hour")
+	private LocalTime hour;
 	
 	@NotNull
 	@Size(max = 65)
 	@Column(name = "message")
 	private String message;
-	
+	/*
 	@NotNull
 	@Size(max = 65)
-	@Column(name = "message")
+	@Column(name = "status_source")
 	private boolean statusSource;
 	
 	@NotNull
 	@Size(max = 65)
-	@Column(name = "message")
+	@Column(name = "status_destiny")
 	private boolean statusDestiny;
+	*/
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_source", referencedColumnName = "id")
@@ -57,14 +67,6 @@ public class MessageModel {
 		this.id = id;
 	}
 
-	public Date getDatetime() {
-		return datetime;
-	}
-
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
-	}
-
 	public String getMessage() {
 		return message;
 	}
@@ -73,7 +75,7 @@ public class MessageModel {
 		this.message = message;
 	}
 
-	public boolean isStatusSource() {
+	/*public boolean isStatusSource() {
 		return statusSource;
 	}
 
@@ -88,7 +90,7 @@ public class MessageModel {
 	public void setStatusDestiny(boolean statusDestiny) {
 		this.statusDestiny = statusDestiny;
 	}
-
+*/
 	public UserModel getSource() {
 		return source;
 	}
@@ -103,5 +105,21 @@ public class MessageModel {
 
 	public void setDestiny(Contact destiny) {
 		this.destiny = destiny;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public LocalTime getHour() {
+		return hour;
+	}
+
+	public void setHour(LocalTime hour) {
+		this.hour = hour;
 	}
 }

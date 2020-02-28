@@ -1,69 +1,98 @@
 package com.pitang.treinamento.mapper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 
 public class ModelConverter {
-	
-	private static final String OUTPUT_FORMAT_FOR_DATE_HOUR = "dd/MM/yyyy";
-	
+
 	private ModelConverter() {
 		throw new IllegalStateException("Utility class");
 	}
-	
+
 	public static final Converter<Boolean, String> convertStatus = new AbstractConverter<Boolean, String>() {
 		@Override
 		protected String convert(Boolean source) {
-			if(source) {
+			if (source) {
 				return "Ativo";
-			}else {
+			} else {
 				return "Inativo";
 			}
 		}
 	};
-	
+
 	public static final Converter<String, Boolean> convertStatusToBoolean = new AbstractConverter<String, Boolean>() {
 		@Override
 		protected Boolean convert(String source) {
-			if(source.equals("Ativo")) {
+			if (source.equals("Ativo")) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}
 	};
-	
-	public static final Converter<Date, String> fromDateToString = new AbstractConverter<Date, String>() {
+
+	public static final Converter<LocalDate, String> fromDateToString = new AbstractConverter<LocalDate, String>() {
 		@Override
-		protected String convert(Date source) {
-			if(source == null) {
+		protected String convert(LocalDate source) {
+			if (source == null) {
 				return null;
 			}
-			SimpleDateFormat df = new SimpleDateFormat(OUTPUT_FORMAT_FOR_DATE_HOUR);
-			return df.format(source.getTime());
+			// data/hora atual
+			LocalDate hoje = LocalDate.now();
+			// formatar a data
+			DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+			String dataFormatada = formatterData.format(hoje);
+
+			return dataFormatada;
 		}
 	};
-	
-	public static final Converter<String, Date> fromStringToDate = new AbstractConverter<String, Date>() {
+
+	public static final Converter<LocalTime, String> fromTimeToString = new AbstractConverter<LocalTime, String>() {
 		@Override
-		protected Date convert(String source) {
-			SimpleDateFormat df = new SimpleDateFormat(OUTPUT_FORMAT_FOR_DATE_HOUR);
+		protected String convert(LocalTime source) {
+			if (source == null) {
+				return null;
+			}
+			// data/hora atual
+			LocalTime agora = LocalTime.now();
+			// formatar a data
+			DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+			String horaFormatada = formatterTime.format(agora);
 
-			df.setLenient(false);
+			return horaFormatada;
+		}
+	};
 
+	public static final Converter<String, LocalDate> fromStringToDate = new AbstractConverter<String, LocalDate>() {
+		@Override
+		protected LocalDate convert(String source) {
 			try {
-
-				Date date = new Date();
-
-				date = df.parse(source);
-
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+				LocalDate date = LocalDate.parse(source, formatter);
 				return date;
 
-			} catch (ParseException e) {
+			} catch (Exception e) {
+
+				System.out.println("ERRO na conversão -> " + e.getMessage());
+
+				return null;
+			}
+		}
+	};
+
+	public static final Converter<String, LocalTime> fromStringToTime = new AbstractConverter<String, LocalTime>() {
+		@Override
+		protected LocalTime convert(String source) {
+			try {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+				LocalTime hour = LocalTime.parse(source, formatter);
+				return hour;
+
+			} catch (Exception e) {
 
 				System.out.println("ERRO na conversão -> " + e.getMessage());
 

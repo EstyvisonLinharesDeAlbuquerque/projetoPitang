@@ -1,16 +1,17 @@
 package com.pitang.treinamento.dto;
 
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import com.pitang.treinamento.model.Contact;
 import com.pitang.treinamento.model.UserModel;
 
 public class MessageDto {
 	private Long id;
-	private Date datetime;
+	private LocalDate date;
+	private LocalTime hour;
 	private String message;
-	private boolean statusSource;
-	private boolean statusDestiny;
+	//private boolean statusSource;
+	//private boolean statusDestiny;
 	private UserModel source;
 	private Contact destiny;
 	
@@ -20,11 +21,18 @@ public class MessageDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getDatetime() {
-		return datetime;
+	
+	public LocalDate getDate() {
+		return date;
 	}
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	public LocalTime getHour() {
+		return hour;
+	}
+	public void setHour(LocalTime hour) {
+		this.hour = hour;
 	}
 	public String getMessage() {
 		return message;
@@ -32,7 +40,7 @@ public class MessageDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public boolean isStatusSource() {
+	/*public boolean isStatusSource() {
 		return statusSource;
 	}
 	public void setStatusSource(boolean statusSource) {
@@ -43,7 +51,7 @@ public class MessageDto {
 	}
 	public void setStatusDestiny(boolean statusDestiny) {
 		this.statusDestiny = statusDestiny;
-	}
+	}*/
 	public UserModel getSource() {
 		return source;
 	}
