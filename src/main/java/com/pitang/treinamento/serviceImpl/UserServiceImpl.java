@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(userModel);
 	}
 
-
 	@Override
 	public UserModel updateUser(Long id, UserModel user) {
 		if (id == null) {

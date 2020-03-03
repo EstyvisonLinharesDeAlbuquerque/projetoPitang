@@ -26,6 +26,7 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setPassword(null);
 				map().setContacts(source.getContacts());
+				map().setMessages(source.getMessages());
 			}
 		});
 
@@ -38,7 +39,7 @@ public class ModelMapperComponent {
 				map().setUsername(source.getUsername());
 				map().setName(source.getName());
 				map().setContacts(source.getContacts());
-
+				map().setMessages(source.getMessages());
 			}
 		});
 
@@ -65,8 +66,8 @@ public class ModelMapperComponent {
 			protected void configure() {
 				map().setMessage(source.getMessage());
 				map().setDatetime(source.getDatetime());
-				map().setIdDestiny(source.getIdDestiny());
-				map().setIdSource(source.getIdSource());
+				map().setDestiny(source.getDestiny());
+				map().setSource(source.getSource());
 			}
 		});
 		
@@ -75,8 +76,8 @@ public class ModelMapperComponent {
 			protected void configure() {
 				map().setMessage(source.getMessage());
 				map().setDatetime(source.getDatetime());
-				map().setIdDestiny(source.getIdDestiny());
-				map().setIdSource(source.getIdSource());
+				map().setDestiny(source.getDestiny());
+				map().setSource(source.getSource());
 			}
 		});
 	}

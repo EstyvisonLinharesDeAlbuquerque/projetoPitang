@@ -1,5 +1,6 @@
 package com.pitang.treinamento.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "user")
-public class UserModel {
+public class UserModel implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,9 @@ public class UserModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Contact> contacts;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "source", cascade = CascadeType.ALL)
+    private List<MessageModel> messages;
 	
 	
 	/*
@@ -94,5 +98,13 @@ public class UserModel {
 
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public List<MessageModel> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<MessageModel> messages) {
+		this.messages = messages;
 	}
 }

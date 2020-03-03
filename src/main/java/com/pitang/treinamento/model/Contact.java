@@ -2,6 +2,9 @@ package com.pitang.treinamento.model;
 
 
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "contact")
-public class Contact {
+public class Contact implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +41,8 @@ public class Contact {
 	@JsonIgnore
 	@JoinColumn(name = "id_userModel", referencedColumnName = "id")
 	private UserModel userModel;
+	
+	
 	
 	public Long getId() {
 		return id;

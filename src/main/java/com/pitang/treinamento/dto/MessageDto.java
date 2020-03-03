@@ -2,12 +2,15 @@ package com.pitang.treinamento.dto;
 
 import java.time.LocalDateTime;
 
+import com.pitang.treinamento.model.Contact;
+import com.pitang.treinamento.model.UserModel;
+
 public class MessageDto {
 	private Long id;
 	private LocalDateTime datetime;
 	private String message;
-	private Long idSource;
-	private Long idDestiny;
+	private UserModel source;
+	private Contact destiny;
 	
 	public Long getId() {
 		return id;
@@ -25,18 +28,17 @@ public class MessageDto {
 	public LocalDateTime getDatetime() {
 		return datetime;
 	}
-	
-	public Long getIdSource() {
-		return idSource;
+	public UserModel getSource() {
+		return source;
 	}
-	public void setIdSource(Long idSource) {
-		this.idSource = idSource;
+	public void setSource(UserModel source) {
+		this.source = source;
 	}
-	public Long getIdDestiny() {
-		return idDestiny;
+	public Contact getDestiny() {
+		return destiny;
 	}
-	public void setIdDestiny(Long idDestiny) {
-		this.idDestiny = idDestiny;
+	public void setDestiny(Contact destiny) {
+		this.destiny = destiny;
 	}
 	public void setDatetime(LocalDateTime datetime) {
 		this.datetime = datetime;

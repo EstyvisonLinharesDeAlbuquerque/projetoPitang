@@ -1,5 +1,6 @@
 package com.pitang.treinamento.contoller;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class MessageController {
 	}
 	
 	
+	@RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<MessageModel>> listMessages(@PathVariable("id") Long id){
+		List<MessageModel> messages = messageService.listMessages(id);
+
+		return new ResponseEntity<>(messages, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/message/{id}/{id2}", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> sendMessages(@PathVariable("id") Long id, @PathVariable("id2") Long id2, @RequestBody MessageDto messageDto){
@@ -41,8 +50,10 @@ public class MessageController {
 			}
 		}
 		
-		messageDto.setIdSource(id);
-		messageDto.setIdDestiny(id2);
+		UserModel user = userRepository.findById(id).get();
+		messageDto.setSource(user);
+		Contact contact = contactRepository.findById(id2).get();
+		messageDto.setDestiny(contact);
 		LocalDateTime agora = LocalDateTime.now();
 		messageDto.setDatetime(agora);
 		

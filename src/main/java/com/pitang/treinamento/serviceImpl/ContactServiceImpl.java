@@ -26,7 +26,6 @@ public class ContactServiceImpl implements ContactService {
 	public List<Contact> listContacts(Long id) {
 		UserModel user = userRepository.findById(id).get();
 		return user.getContacts();
-		
 	}
 	
 	@Override
