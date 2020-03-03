@@ -39,9 +39,6 @@ public class UserModel {
 	@JsonIgnore
 	private List<Contact> contacts;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "source", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<MessageModel> message;
 	
 	/*
 	public UserModel(String name, String username, String email, String password) {
@@ -53,14 +50,6 @@ public class UserModel {
 	*/
 	public Long getId() {
 		return id;
-	}
-
-	public List<MessageModel> getMessage() {
-		return message;
-	}
-
-	public void setMessage(List<MessageModel> message) {
-		this.message = message;
 	}
 
 	public void setId(Long id) {
@@ -106,10 +95,4 @@ public class UserModel {
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
-
-	
-
-	
-
-	
 }

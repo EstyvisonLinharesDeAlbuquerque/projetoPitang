@@ -3,7 +3,6 @@ package com.pitang.treinamento.dto;
 import java.util.List;
 
 import com.pitang.treinamento.model.Contact;
-import com.pitang.treinamento.model.MessageModel;
 
 public class UserDto {
 	private Long id;
@@ -12,15 +11,7 @@ public class UserDto {
 	private String email;
 	private String password;
 	private List<Contact> contacts;
-	private List<MessageModel> message;
 	
-	
-	public List<MessageModel> getMessage() {
-		return message;
-	}
-	public void setMessage(List<MessageModel> message) {
-		this.message = message;
-	}
 	public List<Contact> getContacts() {
 		return contacts;
 	}

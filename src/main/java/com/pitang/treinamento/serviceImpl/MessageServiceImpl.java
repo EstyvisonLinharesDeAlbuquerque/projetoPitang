@@ -2,7 +2,6 @@ package com.pitang.treinamento.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.pitang.treinamento.model.MessageModel;
 import com.pitang.treinamento.repository.MessageRepository;
 import com.pitang.treinamento.service.MessageService;
@@ -18,4 +17,5 @@ public class MessageServiceImpl implements MessageService {
 		
 		return messageRepository.save(message);
 	}
+	
 }

@@ -1,7 +1,5 @@
 package com.pitang.treinamento.contoller;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,7 @@ public class MessageController {
 		this.messageService = messageService;
 	}
 	
+	
 	@RequestMapping(value = "/message/{id}/{id2}", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> sendMessages(@PathVariable("id") Long id, @PathVariable("id2") Long id2, @RequestBody MessageDto messageDto){
@@ -42,17 +41,11 @@ public class MessageController {
 			}
 		}
 		
-		UserModel user = userRepository.findById(id).get();
-		messageDto.setSource(user);
+		messageDto.setIdSource(id);
+		messageDto.setIdDestiny(id2);
+		LocalDateTime agora = LocalDateTime.now();
+		messageDto.setDatetime(agora);
 		
-		Contact contact = contactRepository.findById(id2).get();
-		messageDto.setDestiny(contact);
-		
-		LocalDate date = LocalDate.now();
-		messageDto.setDate(date);
-		
-		LocalTime hour = LocalTime.now();
-		messageDto.setHour(hour);
 		
 		MessageModel message = ModelMapperComponent.modelMapper.map(messageDto, new TypeToken<MessageModel>() {
 		}.getType());

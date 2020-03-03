@@ -10,5 +10,4 @@ public interface ContactService {
 	public List<Contact> listContacts(Long id);
 	
 	public void deleteContact(Long id, Long id2);
-	
 }

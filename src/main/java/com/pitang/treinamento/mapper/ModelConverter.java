@@ -1,7 +1,7 @@
 package com.pitang.treinamento.mapper;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.modelmapper.AbstractConverter;
@@ -35,62 +35,28 @@ public class ModelConverter {
 		}
 	};
 
-	public static final Converter<LocalDate, String> fromDateToString = new AbstractConverter<LocalDate, String>() {
+	public static final Converter<LocalDateTime, String> fromDatetimeToString = new AbstractConverter<LocalDateTime, String>() {
 		@Override
-		protected String convert(LocalDate source) {
+		protected String convert(LocalDateTime source) {
 			if (source == null) {
 				return null;
 			}
-			// data/hora atual
-			LocalDate hoje = LocalDate.now();
-			// formatar a data
-			DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-			String dataFormatada = formatterData.format(hoje);
+			LocalDateTime agora = LocalDateTime.now();
+			DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss");
+			String dataFormatada = formatterData.format(agora);
 
 			return dataFormatada;
 		}
 	};
 
-	public static final Converter<LocalTime, String> fromTimeToString = new AbstractConverter<LocalTime, String>() {
-		@Override
-		protected String convert(LocalTime source) {
-			if (source == null) {
-				return null;
-			}
-			// data/hora atual
-			LocalTime agora = LocalTime.now();
-			// formatar a data
-			DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-			String horaFormatada = formatterTime.format(agora);
 
-			return horaFormatada;
-		}
-	};
-
-	public static final Converter<String, LocalDate> fromStringToDate = new AbstractConverter<String, LocalDate>() {
+	public static final Converter<String, LocalDateTime> fromStringToDatetime = new AbstractConverter<String, LocalDateTime>() {
 		@Override
-		protected LocalDate convert(String source) {
+		protected LocalDateTime convert(String source) {
 			try {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-				LocalDate date = LocalDate.parse(source, formatter);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss");
+				LocalDateTime date = LocalDateTime.parse(source, formatter);
 				return date;
-
-			} catch (Exception e) {
-
-				System.out.println("ERRO na conversão -> " + e.getMessage());
-
-				return null;
-			}
-		}
-	};
-
-	public static final Converter<String, LocalTime> fromStringToTime = new AbstractConverter<String, LocalTime>() {
-		@Override
-		protected LocalTime convert(String source) {
-			try {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-				LocalTime hour = LocalTime.parse(source, formatter);
-				return hour;
 
 			} catch (Exception e) {
 

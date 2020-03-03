@@ -3,14 +3,12 @@ package com.pitang.treinamento.contoller;
 import java.util.List;
 
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.pitang.treinamento.dto.UserDto;
 import com.pitang.treinamento.mapper.ModelMapperComponent;
 import com.pitang.treinamento.model.UserModel;
-import com.pitang.treinamento.repository.UserRepository;
 import com.pitang.treinamento.service.UserService;
 
 

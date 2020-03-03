@@ -1,19 +1,13 @@
 package com.pitang.treinamento.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import com.pitang.treinamento.model.Contact;
-import com.pitang.treinamento.model.UserModel;
+import java.time.LocalDateTime;
 
 public class MessageDto {
 	private Long id;
-	private LocalDate date;
-	private LocalTime hour;
+	private LocalDateTime datetime;
 	private String message;
-	//private boolean statusSource;
-	//private boolean statusDestiny;
-	private UserModel source;
-	private Contact destiny;
+	private Long idSource;
+	private Long idDestiny;
 	
 	public Long getId() {
 		return id;
@@ -22,46 +16,29 @@ public class MessageDto {
 		this.id = id;
 	}
 	
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	public LocalTime getHour() {
-		return hour;
-	}
-	public void setHour(LocalTime hour) {
-		this.hour = hour;
-	}
 	public String getMessage() {
 		return message;
 	}
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	/*public boolean isStatusSource() {
-		return statusSource;
+	public LocalDateTime getDatetime() {
+		return datetime;
 	}
-	public void setStatusSource(boolean statusSource) {
-		this.statusSource = statusSource;
+	
+	public Long getIdSource() {
+		return idSource;
 	}
-	public boolean isStatusDestiny() {
-		return statusDestiny;
+	public void setIdSource(Long idSource) {
+		this.idSource = idSource;
 	}
-	public void setStatusDestiny(boolean statusDestiny) {
-		this.statusDestiny = statusDestiny;
-	}*/
-	public UserModel getSource() {
-		return source;
+	public Long getIdDestiny() {
+		return idDestiny;
 	}
-	public void setSource(UserModel source) {
-		this.source = source;
+	public void setIdDestiny(Long idDestiny) {
+		this.idDestiny = idDestiny;
 	}
-	public Contact getDestiny() {
-		return destiny;
-	}
-	public void setDestiny(Contact destiny) {
-		this.destiny = destiny;
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
 	}
 }

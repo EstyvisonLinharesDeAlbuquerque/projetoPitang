@@ -1,63 +1,41 @@
 package com.pitang.treinamento.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "message")
-public class MessageModel {
+public class MessageModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
-	@Past
-	@Size(max = 65)
-	@Column(name = "date")
-	private LocalDate date;
-	
-	@NotNull
-	@Past
-	@Size(max = 65)
-	@Column(name = "hour")
-	private LocalTime hour;
+	@Column(name = "datetime")
+	private LocalDateTime datetime;
 	
 	@NotNull
 	@Size(max = 65)
-	@Column(name = "message")
+	@Column(name = "msg")
 	private String message;
-	/*
-	@NotNull
-	@Size(max = 65)
-	@Column(name = "status_source")
-	private boolean statusSource;
 	
 	@NotNull
-	@Size(max = 65)
-	@Column(name = "status_destiny")
-	private boolean statusDestiny;
-	*/
+	@Column(name = "source")
+	private Long idSource;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_source", referencedColumnName = "id")
-	private UserModel source;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_destiny", referencedColumnName = "id")
-	private Contact destiny;
+	@NotNull
+	@Column(name = "destiny")
+	private Long idDestiny;
 
 	public Long getId() {
 		return id;
@@ -75,51 +53,27 @@ public class MessageModel {
 		this.message = message;
 	}
 
-	/*public boolean isStatusSource() {
-		return statusSource;
+	public LocalDateTime getDatetime() {
+		return datetime;
 	}
 
-	public void setStatusSource(boolean statusSource) {
-		this.statusSource = statusSource;
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
 	}
 
-	public boolean isStatusDestiny() {
-		return statusDestiny;
+	public Long getIdSource() {
+		return idSource;
 	}
 
-	public void setStatusDestiny(boolean statusDestiny) {
-		this.statusDestiny = statusDestiny;
-	}
-*/
-	public UserModel getSource() {
-		return source;
+	public void setIdSource(Long idSource) {
+		this.idSource = idSource;
 	}
 
-	public void setSource(UserModel source) {
-		this.source = source;
+	public Long getIdDestiny() {
+		return idDestiny;
 	}
 
-	public Contact getDestiny() {
-		return destiny;
-	}
-
-	public void setDestiny(Contact destiny) {
-		this.destiny = destiny;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-	public LocalTime getHour() {
-		return hour;
-	}
-
-	public void setHour(LocalTime hour) {
-		this.hour = hour;
+	public void setIdDestiny(Long idDestiny) {
+		this.idDestiny = idDestiny;
 	}
 }

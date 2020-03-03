@@ -1,22 +1,14 @@
 package com.pitang.treinamento.dto;
 
-import java.util.List;
-
 import com.pitang.treinamento.model.*;
 
 public class ContactDto {
 	private Long id;
 	private String name;
 	private String fone;
-	private UserModel userModel;
-	private List<MessageModel> contactMessage; 
+	private UserModel userModel; 
 	
-	public List<MessageModel> getContactMessage() {
-		return contactMessage;
-	}
-	public void setContactMessage(List<MessageModel> message) {
-		this.contactMessage = message;
-	}
+	
 	public UserModel getUserModel() {
 		return userModel;
 	}
