@@ -27,6 +27,7 @@ public class ModelMapperComponent {
 				map().setPassword(null);
 				map().setContacts(source.getContacts());
 				map().setMessages(source.getMessages());
+				map().setStory(source.getStory());
 			}
 		});
 
@@ -40,6 +41,7 @@ public class ModelMapperComponent {
 				map().setName(source.getName());
 				map().setContacts(source.getContacts());
 				map().setMessages(source.getMessages());
+				map().setStory(source.getStory());
 			}
 		});
 

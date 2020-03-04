@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pitang.treinamento.model.Contact;
 import com.pitang.treinamento.model.MessageModel;
+import com.pitang.treinamento.model.Story;
 
 public class UserDto {
 	private Long id;
@@ -13,7 +14,14 @@ public class UserDto {
 	private String password;
 	private List<Contact> contacts;
 	private List<MessageModel> messages;
+	private List<Story> story;
 	
+	public List<Story> getStory() {
+		return story;
+	}
+	public void setStory(List<Story> story) {
+		this.story = story;
+	}
 	public List<Contact> getContacts() {
 		return contacts;
 	}

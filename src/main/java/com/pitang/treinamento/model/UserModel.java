@@ -112,4 +112,12 @@ public class UserModel implements Serializable{
 	public void setMessages(List<MessageModel> messages) {
 		this.messages = messages;
 	}
+	
+	public List<Story> getStory() {
+		return stories;
+	}
+
+	public void setStory(List<Story> stories) {
+		this.stories = stories;
+	}
 }

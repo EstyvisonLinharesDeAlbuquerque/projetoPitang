@@ -1,6 +1,7 @@
 package com.pitang.treinamento.contoller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ import com.pitang.treinamento.dto.MessageDto;
 import com.pitang.treinamento.dto.StoryDto;
 import com.pitang.treinamento.exceptions.ExceptionConflict;
 import com.pitang.treinamento.mapper.ModelMapperComponent;
+import com.pitang.treinamento.model.Contact;
 import com.pitang.treinamento.model.MessageModel;
 import com.pitang.treinamento.model.Story;
 import com.pitang.treinamento.model.UserModel;
+import com.pitang.treinamento.repository.ContactRepository;
 import com.pitang.treinamento.repository.UserRepository;
 import com.pitang.treinamento.service.StoryService;
 
@@ -29,10 +32,21 @@ public class StoryController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	private ContactRepository contactRepository;
 
 	public StoryController(StoryService storyService) {
 		super();
 		this.storyService = storyService;
+	}
+	
+	@RequestMapping(value = "/story/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> listStories(@PathVariable("id") Long id){
+		List<Story> stories = storyService.listStories(id);
+
+		return new ResponseEntity<>(stories, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/story/{id}", method = RequestMethod.POST)
@@ -59,5 +73,27 @@ public class StoryController {
 		
 		return new ResponseEntity<>("Story enviado com sucesso", HttpStatus.OK);
 	}
-
+	
+	@RequestMapping(value = "/story_view/{id}/{id2}/", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> addView(@PathVariable("id") Long id, @PathVariable("id2") Long id2){
+		if(userRepository.findById(id).get() == null) {
+			throw new ExceptionConflict("Usuário inexistente");
+		}else {
+			if(contactRepository.findById(id2).get() == null) {
+				throw new ExceptionConflict("Contato inexistente na lista de usuário");
+			}
+		}
+		
+		Contact contact = contactRepository.findById(id2).get();
+		storyDto.getViews().add(contact);
+		
+		Story story = ModelMapperComponent.modelMapper.map(storyDto, new TypeToken<Story>() {
+		}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		storyService.addView(story);
+		
+		return new ResponseEntity<>("Alguém view", HttpStatus.OK);
+	}
 }
