@@ -69,6 +69,17 @@ public class MessageController {
 		ModelMapperComponent.modelMapper.validate();
 		
 		return new ResponseEntity<>("Mensagem enviada com sucesso", HttpStatus.OK);
+		}
+	
+	@RequestMapping(value = "/message/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<?> deleteAllMessages(@PathVariable("id") Long id) {
+		if (messageService.listMessages(id) == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		
+		messageService.deleteMessages(id);
+		
+		return new ResponseEntity<>("Conversa apagada com sucesso!",HttpStatus.OK);
 	}
 }

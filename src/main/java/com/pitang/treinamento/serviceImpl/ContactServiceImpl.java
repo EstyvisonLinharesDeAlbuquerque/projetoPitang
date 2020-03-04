@@ -41,7 +41,6 @@ public class ContactServiceImpl implements ContactService {
 		if(user.isPresent()) {
 			contactRepository.deleteById(id2);
 		}
-		
 	}
 
 	private void validateContact(Contact contact) {

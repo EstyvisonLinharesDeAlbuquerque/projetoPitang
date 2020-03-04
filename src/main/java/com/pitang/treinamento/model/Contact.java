@@ -42,8 +42,6 @@ public class Contact implements Serializable{
 	@JoinColumn(name = "id_userModel", referencedColumnName = "id")
 	private UserModel userModel;
 	
-	
-	
 	public Long getId() {
 		return id;
 	}

@@ -1,6 +1,7 @@
 package com.pitang.treinamento.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,15 @@ public class MessageServiceImpl implements MessageService {
 	public List<MessageModel> listMessages(Long id) {
 		UserModel user = userRepository.findById(id).get();
 		return user.getMessages();
+	}
+
+	@Override
+	public void deleteMessages(Long id) {
+		Optional<UserModel> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			messageRepository.deleteAll();
+		}
+		
 	}
 	
 }
