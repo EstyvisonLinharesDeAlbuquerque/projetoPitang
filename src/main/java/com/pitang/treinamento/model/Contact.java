@@ -3,6 +3,7 @@ package com.pitang.treinamento.model;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class Contact implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	@JoinColumn(name = "id_userModel", referencedColumnName = "id")
+	@JoinColumn(name = "id_userModel", referencedColumnName = "idUser")
 	private UserModel userModel;
 	
 	public Long getId() {

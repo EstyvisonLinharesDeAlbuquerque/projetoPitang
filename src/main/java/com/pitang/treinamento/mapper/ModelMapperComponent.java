@@ -68,6 +68,8 @@ public class ModelMapperComponent {
 				map().setDatetime(source.getDatetime());
 				map().setDestiny(source.getDestiny());
 				map().setSource(source.getSource());
+				map().setStatusDestiny(source.getStatusDestiny());
+				map().setStatusSource(source.getStatusSource());
 			}
 		});
 		
@@ -78,6 +80,30 @@ public class ModelMapperComponent {
 				map().setDatetime(source.getDatetime());
 				map().setDestiny(source.getDestiny());
 				map().setSource(source.getSource());
+				map().setStatusDestiny(source.getStatusDestiny());
+				map().setStatusSource(source.getStatusSource());
+			}
+		});
+		
+		modelMapper.addMappings(new PropertyMap<Story, StoryDto>() {
+			@Override
+			protected void configure() {
+				map().setMessage(source.getMessage());
+				map().setDatetime(source.getDatetime());
+				map().setStatus(source.getStatus());
+				map().setUserSource(source.getUserSource());
+				map().setViews(source.getViews());
+			}
+		});
+		
+		modelMapper.addMappings(new PropertyMap<StoryDto, Story>() {
+			@Override
+			protected void configure() {
+				map().setMessage(source.getMessage());
+				map().setDatetime(source.getDatetime());
+				map().setStatus(source.getStatus());
+				map().setUserSource(source.getUserSource());
+				map().setViews(source.getViews());
 			}
 		});
 	}

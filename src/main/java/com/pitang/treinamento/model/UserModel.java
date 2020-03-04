@@ -15,7 +15,7 @@ public class UserModel implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idUser;
 
 	@NotNull
 	@Size(max = 65)
@@ -30,7 +30,7 @@ public class UserModel implements Serializable{
 	@NotNull
 	@Size(max = 65)
 	@Column(name = "email")
-	public String email;
+	private String email;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@NotNull
@@ -41,7 +41,12 @@ public class UserModel implements Serializable{
 	private List<Contact> contacts;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "source", cascade = CascadeType.ALL)
+	@JsonIgnore
     private List<MessageModel> messages;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userSource", cascade = CascadeType.ALL)
+	@JsonIgnore
+    private List<Story> stories;
 	
 	
 	/*
@@ -53,11 +58,11 @@ public class UserModel implements Serializable{
 	}
 	*/
 	public Long getId() {
-		return id;
+		return idUser;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getName() {

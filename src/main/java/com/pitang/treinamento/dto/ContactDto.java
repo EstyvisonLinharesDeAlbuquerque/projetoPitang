@@ -8,7 +8,6 @@ public class ContactDto {
 	private String fone;
 	private UserModel userModel; 
 	
-	
 	public UserModel getUserModel() {
 		return userModel;
 	}

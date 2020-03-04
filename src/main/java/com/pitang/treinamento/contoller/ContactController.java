@@ -56,7 +56,7 @@ public class ContactController {
 		}.getType());
 		ModelMapperComponent.modelMapper.validate();
 
-		return new ResponseEntity<>(contactDto, HttpStatus.OK);
+		return new ResponseEntity<>("Contato adicionado com sucesso!", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/contact/{id}/{id2}", method = RequestMethod.DELETE)

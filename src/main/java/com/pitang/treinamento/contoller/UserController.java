@@ -52,7 +52,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<UserDto> addUsers(@RequestBody UserDto userDto){
+	public ResponseEntity<?> addUsers(@RequestBody UserDto userDto){
 		if(userDto == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -65,12 +65,12 @@ public class UserController {
 		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		return new ResponseEntity<>(userDto,HttpStatus.OK);
+		return new ResponseEntity<>("Usuário adicionado com sucesso!",HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<UserDto> updateUsers(@PathVariable("id") Long id, @RequestBody UserDto userDto){
+	public ResponseEntity<?> updateUsers(@PathVariable("id") Long id, @RequestBody UserDto userDto){
 		
 		List<UserModel> users = userService.listUsers();
 		if(users.size() == 0) {
@@ -85,7 +85,7 @@ public class UserController {
 		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		return new ResponseEntity<>(userDto,HttpStatus.OK);
+		return new ResponseEntity<>("Usuário atualizado com sucesso!",HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)

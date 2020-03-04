@@ -10,11 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -34,20 +34,28 @@ public class MessageModel implements Serializable{
 	private LocalDateTime datetime;
 	
 	@NotNull
-	@Size(max = 65)
+	@Size(max = 200)
 	@Column(name = "msg")
 	private String message;
 	
+	@NotNull
+	@Column(name = "status_source")
+	private Boolean statusSource;
+	
+	@NotNull
+	@Column(name = "status_destiny")
+	private Boolean statusDestiny;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="source", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name="source", referencedColumnName = "idUser", nullable = false)
 	@JsonIgnore
 	private UserModel source;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "destiny", referencedColumnName = "id_userModel", nullable = false)
-    private Contact destiny;
+    @JoinColumn(name = "destiny", referencedColumnName = "id", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Contact destiny;
 	
-
 	public Long getId() {
 		return id;
 	}
@@ -86,5 +94,21 @@ public class MessageModel implements Serializable{
 
 	public void setDestiny(Contact destiny) {
 		this.destiny = destiny;
+	}
+
+	public Boolean getStatusSource() {
+		return statusSource;
+	}
+
+	public void setStatusSource(Boolean statusSource) {
+		this.statusSource = statusSource;
+	}
+
+	public Boolean getStatusDestiny() {
+		return statusDestiny;
+	}
+
+	public void setStatusDestiny(Boolean statusDestiny) {
+		this.statusDestiny = statusDestiny;
 	}
 }

@@ -11,6 +11,8 @@ public class MessageDto {
 	private String message;
 	private UserModel source;
 	private Contact destiny;
+	private Boolean statusSource;
+	private Boolean statusDestiny;
 	
 	public Long getId() {
 		return id;
@@ -42,5 +44,17 @@ public class MessageDto {
 	}
 	public void setDatetime(LocalDateTime datetime) {
 		this.datetime = datetime;
+	}
+	public Boolean getStatusSource() {
+		return statusSource;
+	}
+	public void setStatusSource(Boolean statusSource) {
+		this.statusSource = statusSource;
+	}
+	public Boolean getStatusDestiny() {
+		return statusDestiny;
+	}
+	public void setStatusDestiny(Boolean statusDestiny) {
+		this.statusDestiny = statusDestiny;
 	}
 }

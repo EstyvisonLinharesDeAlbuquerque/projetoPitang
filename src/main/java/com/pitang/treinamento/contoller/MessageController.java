@@ -56,6 +56,8 @@ public class MessageController {
 		messageDto.setDestiny(contact);
 		LocalDateTime agora = LocalDateTime.now();
 		messageDto.setDatetime(agora);
+		messageDto.setStatusDestiny(true);
+		messageDto.setStatusSource(true);
 		
 		
 		MessageModel message = ModelMapperComponent.modelMapper.map(messageDto, new TypeToken<MessageModel>() {
@@ -71,14 +73,14 @@ public class MessageController {
 		return new ResponseEntity<>("Mensagem enviada com sucesso", HttpStatus.OK);
 		}
 	
-	@RequestMapping(value = "/message/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/message/{id}/{id2}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<?> deleteAllMessages(@PathVariable("id") Long id) {
+	public ResponseEntity<?> deleteAllMessages(@PathVariable("id") Long id, Long id2) {
 		if (messageService.listMessages(id) == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		messageService.deleteMessages(id);
+		messageService.deleteMessages(id, id2);
 		
 		return new ResponseEntity<>("Conversa apagada com sucesso!",HttpStatus.OK);
 	}

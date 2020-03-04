@@ -7,5 +7,5 @@ import com.pitang.treinamento.model.MessageModel;
 public interface MessageService {
 	public MessageModel sendMessage(MessageModel message);
 	public List<MessageModel> listMessages(Long id);
-	public void deleteMessages(Long id);
+	public void deleteMessages(Long id, Long id2);
 }
