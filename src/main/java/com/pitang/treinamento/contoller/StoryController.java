@@ -43,7 +43,7 @@ public class StoryController {
 	
 	@RequestMapping(value = "/story/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?> listStories(@PathVariable("id") Long id){
+	public ResponseEntity<?> listStories(@PathVariable("id") Long id ){
 		List<Story> stories = storyService.listStories(id);
 
 		return new ResponseEntity<>(stories, HttpStatus.OK);
@@ -73,10 +73,10 @@ public class StoryController {
 		
 		return new ResponseEntity<>("Story enviado com sucesso", HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/story_view/{id}/{id2}/", method = RequestMethod.POST)
+	/*
+	@RequestMapping(value = "/story_view/{id}/{id2}/{id3}", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> addView(@PathVariable("id") Long id, @PathVariable("id2") Long id2){
+	public ResponseEntity<?> addView(@PathVariable("id") Long id, @PathVariable("id2") Long id2, @PathVariable("id3") Long id3, @RequestBody StoryDto storyDto){
 		if(userRepository.findById(id).get() == null) {
 			throw new ExceptionConflict("Usuário inexistente");
 		}else {
@@ -92,8 +92,21 @@ public class StoryController {
 		}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		storyService.addView(story);
+		storyService.addView(id3, story);
 		
 		return new ResponseEntity<>("Alguém view", HttpStatus.OK);
 	}
+	*/
+	@RequestMapping(value = "/story/{id}/{id2}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<?> deleteStory(@PathVariable Long id){
+		
+		List<Story> stories = storyService.listStories(id);
+		if(stories.size() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>("Story removido com sucesso!",HttpStatus.OK);
+	}
+	
 }
