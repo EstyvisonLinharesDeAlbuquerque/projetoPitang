@@ -12,7 +12,7 @@ public class StoryDto {
 	private String message;
 	private UserModel userSource;
 	private Boolean status;
-	private List<Contact> views;
+	//private List<Contact> views;
 	
 	public Long getId() {
 		return id;
@@ -44,10 +44,12 @@ public class StoryDto {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+	/*
 	public List<Contact> getViews() {
 		return views;
 	}
 	public void setViews(List<Contact> views) {
 		this.views = views;
 	}
+	*/
 }

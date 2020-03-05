@@ -75,7 +75,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/message/{id}/{id2}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<?> deleteAllMessages(@PathVariable("id") Long id, Long id2) {
+	public ResponseEntity<?> deleteMessagesUser(@PathVariable("id") Long id, @PathVariable("id2") Long id2) {
 		if (messageService.listMessages(id) == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -84,4 +84,17 @@ public class MessageController {
 		
 		return new ResponseEntity<>("Conversa apagada com sucesso!",HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/message/{id}/{id2}/{id3}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<?> deleteMessagesUserAndContact(@PathVariable("id") Long id, @PathVariable("id2") Long id2, @PathVariable("id3") Long id3 ) {
+		if (messageService.listMessages(id) == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		messageService.deleteMessages(id, id2, id3);
+		
+		return new ResponseEntity<>("Conversa apagada com sucesso!",HttpStatus.OK);
+	}
+	
 }

@@ -50,10 +50,11 @@ public class Story implements Serializable{
 	@Column(name = "status")
 	private Boolean status;
 	
+	/*
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.ALL)
 	@JsonIgnore
     private List<Contact> views;
-	
+	*/
 
 	public Long getId() {
 		return id;
@@ -94,7 +95,7 @@ public class Story implements Serializable{
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-
+/*
 	public List<Contact> getViews() {
 		return views;
 	}
@@ -102,4 +103,5 @@ public class Story implements Serializable{
 	public void setViews(List<Contact> views) {
 		this.views = views;
 	}
+	*/
 }

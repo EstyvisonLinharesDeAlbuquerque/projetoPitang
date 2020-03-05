@@ -94,7 +94,7 @@ public class ModelMapperComponent {
 				map().setDatetime(source.getDatetime());
 				map().setStatus(source.getStatus());
 				map().setUserSource(source.getUserSource());
-				map().setViews(source.getViews());
+				//map().setViews(source.getViews());
 			}
 		});
 		
@@ -105,7 +105,7 @@ public class ModelMapperComponent {
 				map().setDatetime(source.getDatetime());
 				map().setStatus(source.getStatus());
 				map().setUserSource(source.getUserSource());
-				map().setViews(source.getViews());
+				//map().setViews(source.getViews());
 			}
 		});
 	}

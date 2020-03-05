@@ -25,9 +25,6 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired 
-	private ContactRepository contactRepository;
-	
 	@Override
 	public MessageModel sendMessage(MessageModel message) {
 		checkIntegrityMessage(message);
@@ -42,10 +39,12 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public void deleteMessages(Long id, Long id2) {
-		Optional<UserModel> user = userRepository.findById(id);
-		Optional<Contact> contact = contactRepository.findById(id2);
-		if(user.isPresent()) {
-			messageRepository.deleteAll();
+		MessageModel message = messageRepository.findById(id2).get();
+		if(id == message.getSource().getId()) {
+			message.setStatusSource(false);
+			messageRepository.save(message);
+		}else {
+			throw new ExceptionBadRequest("O usuário não é a fonte dessa mensagem.");
 		}
 	}
 	
@@ -57,7 +56,17 @@ public class MessageServiceImpl implements MessageService {
 		if (StringUtils.isEmpty(message.getDestiny())) {
 			throw new ExceptionBadRequest("O destino é inexistente.");
 		}
-		
 	}
-	
+
+	@Override
+	public void deleteMessages(Long id, Long id2, Long id3) {
+		MessageModel message = messageRepository.findById(id3).get();
+		if((id == message.getSource().getId()) && (id2 == message.getDestiny().getId())) {
+			message.setStatusSource(false);
+			message.setStatusDestiny(false);
+			messageRepository.save(message);
+		}else {
+			throw new ExceptionBadRequest("O usuário ou contato não são fontes válidas para essa mensagem.");
+		}
+	}
 }
