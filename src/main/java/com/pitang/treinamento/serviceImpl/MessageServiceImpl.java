@@ -34,7 +34,13 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<MessageModel> listMessages(Long id) {
 		UserModel user = userRepository.findById(id).get();
-		return user.getMessages();
+		List<MessageModel> allMessages = user.getMessages();
+		for(int i=0; i<allMessages.size(); i++) {
+			if((allMessages.get(i).getStatusSource() != true) || (allMessages.get(i).getStatusDestiny() != true)) {
+				allMessages.remove(i);
+				}
+		}
+		return allMessages;
 	}
 
 	@Override

@@ -48,15 +48,9 @@ public class UserModel implements Serializable{
 	@JsonIgnore
     private List<Story> stories;
 	
+	@OneToOne(cascade=CascadeType.PERSIST)
+    private ProfileImageModel profileImageModel;
 	
-	/*
-	public UserModel(String name, String username, String email, String password) {
-		setName(name);
-		setUsername(username);
-		setEmail(email);
-		setPassword(password);
-	}
-	*/
 	public Long getId() {
 		return idUser;
 	}
